@@ -5,23 +5,17 @@ using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.EventSystems;
 
-public class SharpTAG : MonoBehaviour {
-	public Text outputBox;
-	public InputField inputBox;
+static class SharpTAG {
 	// Use this for initialization
-	void Start () {
+	public static void Start () {
 
 	}
 	// Update is called once per frame
-	void Update () {
+	public static void Update () {
 
 	}
-	public void enterHandler() {
-		output(getInput());
-		inputBox.text = "";
-		inputBox.ActivateInputField();
-	}
-	void output(string str) {
+	public static void output(string str) {
+		Text outputBox = GameObject.Find("OutputField").GetComponent<Text>();
 		string[] lines = outputBox.text.Split(new string[] { "\n" },
 		System.StringSplitOptions.None);
 
@@ -36,10 +30,11 @@ public class SharpTAG : MonoBehaviour {
 		}
 		outputBox.text += "> " + str + "\n";
 	}
-	void select() {
+	public static void select() {
 
 	}
-	string getInput() {
+	public static string getInput() {
+		InputField inputBox = GameObject.Find("InputField").GetComponent<InputField>();
 		return inputBox.text;
 	}
 }
