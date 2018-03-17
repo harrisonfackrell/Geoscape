@@ -6,8 +6,8 @@ using UnityEditor;
 using UnityEngine.EventSystems;
 
 public class OutputPrinter {
+	static Text outputBox = GameObject.Find("OutputField").GetComponent<Text>();
 	private static void reprintLines(string[] lines) {
-		Text outputBox = GameObject.Find("OutputField").GetComponent<Text>();
 		//Print the first line, or throw it out if there are too many lines
 		if (lines.Length < calcLineLimit() && lines.Length > 1) {
 			outputBox.text = lines[0] + "\n";
@@ -30,7 +30,6 @@ public class OutputPrinter {
 		}
 	}
 	private static void outputRaw(string str) {
-		Text outputBox = GameObject.Find("OutputField").GetComponent<Text>();
 		outputBox.text += str;
 	}
 	private static int calcCharLimit() {
@@ -54,7 +53,6 @@ public class OutputPrinter {
 		return lines;
 	}
 	public static void output(string str) {
-		Text outputBox = GameObject.Find("OutputField").GetComponent<Text>();
 		//Split the existing text into its component lines
 		string[] lines = outputBox.text.Split(new string[] { "\n" },
 		System.StringSplitOptions.None);
