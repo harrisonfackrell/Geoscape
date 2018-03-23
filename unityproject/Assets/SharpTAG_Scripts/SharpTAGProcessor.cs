@@ -9,14 +9,13 @@ using static SharpTAG;
 public class SharpTAGProcessor : MonoBehaviour {
 	public Text outputBox;
 	public InputField inputBox;
-	public World world;
 	public static SharpTAGProcessor instance;
 	// Use this for initialization
-	void Start () {
+	void Awake() {
 		SharpTAGProcessor.instance = this;
 	}
 	// Update is called once per frame
-	void Update () {
+	void Update() {
 
 	}
 	public void enterHandler() {

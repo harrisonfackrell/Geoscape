@@ -36,6 +36,6 @@ public class TestGame {
     }
   );
   public static void init() {
-    SharpTAGProcessor.instance.world = TestGame.world;
+    SharpTAGConfiguration.world = TestGame.world;
   }
 }
