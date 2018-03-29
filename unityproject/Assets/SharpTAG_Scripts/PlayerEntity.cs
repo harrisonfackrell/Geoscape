@@ -13,7 +13,7 @@ public class PlayerEntity : GenericEntity {
     this.location = location;
     this.methods = new Dictionary<string, Action> {
       { "nothing", () => {
-
+        
       } }
     };
     this.methods = methods;
