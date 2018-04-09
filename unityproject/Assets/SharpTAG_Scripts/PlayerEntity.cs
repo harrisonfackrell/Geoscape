@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using static SharpTAG;
 
-public class PlayerEntity : GenericEntity {
+public class PlayerEntity : Interactable {
   public PlayerEntity() {
-    throw new Exception("GenericEntity constructor cannot be used by subclass");
+    throw new Exception("Interactable constructor cannot be used by subclass");
   }
   public PlayerEntity(string location, Dictionary<string, Action> methods,
    Action turn) {
@@ -13,7 +13,7 @@ public class PlayerEntity : GenericEntity {
     this.location = location;
     this.methods = new Dictionary<string, Action> {
       { "nothing", () => {
-        
+
       } }
     };
     this.methods = methods;

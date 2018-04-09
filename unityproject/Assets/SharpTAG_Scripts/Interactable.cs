@@ -2,7 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class GenericEntity {
+public class Interactable {
   public string name;
   public string location;
   public string description;
@@ -10,7 +10,7 @@ public class GenericEntity {
   public string givenName;
   public string prevLocation;
   public Action turn;
-  public GenericEntity() {
+  public Interactable() {
 
   }
 }

@@ -42,7 +42,7 @@ public class InputProcessor {
     //Return false if the input contains no synonyms
     return false;
   }
-  private static GenericEntity detectEntity(string input, Entity[] entities) {
+  private static Interactable detectEntity(string input, Interactable[] entities) {
     //For every entity
     for (int i = 0; i < entities.Length; i++) {
       //Test for its name in the input
@@ -53,16 +53,40 @@ public class InputProcessor {
     //If no input is found, return the player.
     return getPlayer();
   }
-  private static string detectAction(string input, Entity subject) {
+  private static Action detectAction(string input, Interactable subject) {
     //For each key in the subject's methods
     foreach (string key in subject.methods.Keys) {
       //Test to see if the input contains it
       if(testForWord(input, key)) {
         //return the key
-        return key;
+        return subject.methods[key];
       }
     }
     //If nothing worked, return "nothing"
-    return "nothing";
+    return subject.methods["nothing"];
+  }
+  private static Action parseInput(string input) {
+    //Parses input, returning an action to run.
+
+    //Get the player and interactables
+    PlayerEntity player = getPlayer();
+    Interactable[] interactables = getInteractables();
+    //Narrow the interactables according to the player's location
+    interactables = narrowInteractables(getInteractables(), player.location);
+    //Find a subject
+    Interactable subject = detectEntity(input, interactables);
+    //If the subject is the player (default)
+    if (subject == player) {
+      //Try again with the inventory
+      interactables = narrowInteractables(getInteractables(), "Inventory");
+      subject = detectEntity(input, interactables);
+    }
+    //Find and return an action on the subject.
+    return detectAction(input, subject);
+  }
+  public static void parseAndExecuteInput(string input) {
+    //Parses and executes input. TAGjs adds some additional effects not yet
+    //implemented in SharpTAG; these will come in a future update.
+    parseInput(input)();
   }
 }

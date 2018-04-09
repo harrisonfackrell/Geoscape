@@ -26,9 +26,22 @@ static class SharpTAG {
 	public static Room[] getRooms() {
 		return getWorld().rooms;
 	}
-	public static GenericEntity[] narrowEntities(GenericEntity[] entities,
+	public static Interactable[] getInteractables() {
+		//Get all of the interactable collections
+		Entity[] entities = getEntities();
+		PlayerEntity player = getPlayer();
+		//Make an empty Interactable[] with the appropriate length
+		int length = entities.Length + 1;
+		Interactable[] interactables = new Interactable[length];
+		//Copy each interactable collection to the empty array in turn
+		entities.CopyTo(interactables, 0);
+		interactables[interactables.Length - 1] = player;
+		//Return the new interactable[]
+		return interactables;
+	}
+	public static Interactable[] narrowInteractables(Interactable[] entities,
 	 string roomName) {
-		List<GenericEntity> narrowedEntities = new List<GenericEntity>();
+		List<Interactable> narrowedEntities = new List<Interactable>();
 		for (int i = 0; i < entities.Length; i++) {
 			if (entities[i].location == roomName) {
 				narrowedEntities.Add(entities[i]);

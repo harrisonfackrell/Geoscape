@@ -3,9 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using static SharpTAG;
 
-public class Entity : GenericEntity {
+public class Entity : Interactable {
   public Entity() {
-    throw new Exception("GenericEntity constructor cannot be used by subclass");
+    throw new Exception("Interactable constructor cannot be used by subclass");
   }
   public Entity(string name, string location, string description,
    Dictionary<string, Action> methods, string givenName, Action turn = null) {
