@@ -58,11 +58,11 @@ public class InputProcessor {
     foreach (string key in subject.methods.Keys) {
       //Test to see if the input contains it
       if(testForWord(input, key)) {
-        //return the key
+        //return the action corresponding to the key.
         return subject.methods[key];
       }
     }
-    //If nothing worked, return "nothing"
+    //If nothing worked, return the "nothing" action.
     return subject.methods["nothing"];
   }
   private static Action parseInput(string input) {

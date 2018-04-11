@@ -49,4 +49,20 @@ static class SharpTAG {
 		}
 		return narrowedEntities.ToArray();
 	}
+	public static Interactable findByName(string name, Interactable[] arr) {
+		for (int i = 0; i < arr.Length; i++) {
+			if (arr[i].name == name) {
+				return arr[i];
+			}
+		}
+		return null;
+	}
+	public static Room findByName(string name, Room[] arr) {
+		for (int i = 0; i < arr.Length; i++) {
+			if (arr[i].name == name) {
+				return arr[i];
+			}
+		}
+		return null;
+	}
 }

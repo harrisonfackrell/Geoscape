@@ -1,3 +1,3 @@
 public class SharpTAGConfiguration {
-  public static World world;
+  public static World world = TestGame.world;
 }

@@ -13,10 +13,18 @@ public class PlayerEntity : Interactable {
     this.location = location;
     this.methods = new Dictionary<string, Action> {
       { "nothing", () => {
-
-      } }
+        output("I'm afraid I don't understand");
+      } },
+      { "inventory", () => {
+        Interactable[] entities = narrowInteractables(getEntities(), "Inventory");
+        if (entities.Length > 0) {
+          output("You have stuff");
+        } else {
+          output("You don't have stuff");
+        }
+      } },
     };
-    this.methods = methods;
+    this.methods = DataMutator.mergeDictionaries(this.methods, methods);
     this.prevLocation = location;
     this.givenName = "player";
   }

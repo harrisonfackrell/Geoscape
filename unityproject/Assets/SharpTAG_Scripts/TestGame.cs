@@ -8,6 +8,7 @@ public class TestGame {
     new Dictionary<string, string[]> {
       {"look", new[] {"look", "examine"}},
       {"attack", new[] {"attack","kick","punch","fight","destroy","crush","break","smash","kill","bite"}},
+      {"inventory", new[] {"inventory","item"}}
     },
     new PlayerEntity("Nowhere",
       new Dictionary<string, Action> {

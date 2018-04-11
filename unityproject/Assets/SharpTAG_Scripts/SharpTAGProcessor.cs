@@ -19,7 +19,7 @@ public class SharpTAGProcessor : MonoBehaviour {
 
 	}
 	public void enterHandler() {
-		output(getInput());
+		InputProcessor.parseAndExecuteInput(getInput());
 		inputBox.text = "";
 		inputBox.ActivateInputField();
 	}
