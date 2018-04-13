@@ -19,8 +19,8 @@ public class TestGame {
     new Room[] {
       new Room("Nowhere",
         "You are nowhere. It's quite a nice place, actually.",
-        new Dictionary<string, string[]> {
-          {"south", new[] {"Nowhere.south","go south of nowhere"}}
+        new Dictionary<string, Exit> {
+          {"south", new Exit("Nowhere.south","go south of nowhere")}
         },
         "Nowhere"
       )

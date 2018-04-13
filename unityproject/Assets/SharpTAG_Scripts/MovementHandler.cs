@@ -11,10 +11,9 @@ public class MovementHandler {
     entity.location = roomName;
   }
   public static void moveEntity(Interactable entity, string direction) {
-
     Room currentRoom = findByName(entity.location, getRooms());
-    Dictionary<string, string[]> exits = currentRoom.exits;
-    warp(entity, exits[direction][0]);
+    Dictionary<string, Exit> exits = currentRoom.exits;
+    warp(entity, exits[direction].location);
   }
   public static void movePlayerByInput(string input) {
     PlayerEntity player = getPlayer();

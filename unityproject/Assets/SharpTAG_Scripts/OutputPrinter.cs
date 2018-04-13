@@ -61,4 +61,20 @@ public class OutputPrinter {
 		//Print the new line
 		printNewLine(str);
 	}
+	public static string tagify(string tagtext, string str) {
+		return tagify(tagtext, str, str);
+	}
+	public static string tagify(string tagtext, string str, string substr) {
+		if (str.Contains(substr)) {
+			return str.Replace(substr, "<" + tagtext + ">" + substr + "</" + tagtext + ">");
+		} else {
+			return str;
+		}
+	}
+	public static string embolden(string str) {
+		return tagify("b", str);
+	}
+	public static string embolden(string str, string substr) {
+		return tagify("b", str, substr);
+	}
 }
