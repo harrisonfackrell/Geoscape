@@ -15,7 +15,7 @@ public class DisplayManager {
   public static void updateRoomDisplay(string roomName) {
      Room room = findByName(roomName, getRooms());
      updateNameDisplay(room.givenName);
-     output(""/*buildCompleteDescription(room)*/);
+     output(DisplayManager.buildCompleteDescription(roomName));
   }
   private static string describe(string roomName) {
     return findByName(roomName, getRooms()).description + ".";
@@ -23,34 +23,37 @@ public class DisplayManager {
   private static string describeEntities(string roomName) {
     ArrayList descriptionList = new ArrayList();
     Interactable[] entities = narrowInteractables(getEntities(), roomName);
-    for (int i = 0; i < entities.Length; i++) {
-      descriptionList.Add(OutputPrinter.embolden(entities[i].description,
-        entities[i].givenName));
+    if (entities.Length > 0) {
+      for (int i = 0; i < entities.Length; i++) {
+        descriptionList.Add(OutputPrinter.embolden(entities[i].description,
+          entities[i].givenName));
+      }
+      return manageListGrammar(descriptionList, "and") + ".";
+    } else {
+      return "nothing worthy of note.";
     }
-    return manageListGrammar(descriptionList, "and") + ".";
   }
   private static string describeExits(Dictionary<string, Exit> exits) {
-    ArrayList descriptionList = new ArrayList();
-    foreach (key in exits.Keys) {
-      descriptionList.Add(embolden(exits[key].description, key));
+    if (exits.Count > 0) {
+      ArrayList descriptionList = new ArrayList();
+      foreach (string key in exits.Keys) {
+        descriptionList.Add(OutputPrinter.embolden(exits[key].description, key));
+      }
+      return manageListGrammar(descriptionList, "or") + ".";
+    } else {
+      return "not see any obvious exits.";
     }
-    return manageListGrammar(descriptionArray, "or") + ".";
   }
   private static string describeExits(string roomName) {
-    Room room = findByName(roomName, getEntities())
+    Room room = findByName(roomName, getRooms());
     return describeExits(room.exits);
   }
-  //UNFINISHED
-  // public static string buildCompleteDescription(roomName) {
-  //   string description = "";
-  //   description += describe(room);
-  //
-  //   Interactable[] entities = narrowInteractables(getEntities(), roomName);
-  //   if (entities.Length > 0) {
-  //     description += " You see " + describeEntities(roomName);
-  //   }
-  // }
-  //END UNFINISHED
+  public static string buildCompleteDescription(string roomName) {
+    string description = describe(roomName);
+    description += " You see " + describeEntities(roomName);
+    description += " You can " + describeExits(roomName);
+    return description;
+  }
   private static string manageListGrammar(ArrayList elements, string delimiter) {
     string description = "";
     for (var i = 0; i < elements.Count; i++) {

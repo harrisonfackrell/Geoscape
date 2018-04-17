@@ -1,9 +1,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
 using static SharpTAG;
 
-public class TestGame {
+public class TestGame : MonoBehaviour {
   public static World world = new World(
     new Dictionary<string, string[]> {
       {"look", new[] {"look", "examine"}},
@@ -36,7 +38,8 @@ public class TestGame {
       )
     }
   );
-  public static void init() {
+  public void init() {
     SharpTAGConfiguration.world = TestGame.world;
+    SceneManager.LoadScene("SharpTAG UI", LoadSceneMode.Single);
   }
 }
