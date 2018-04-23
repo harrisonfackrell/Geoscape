@@ -22,7 +22,10 @@ void Start () {
 	}
 
 	// Update is called once per frame
-	void Update () {
-
+	void Update ()
+	{
+		float horizontalMovement = Input.GetAxisRaw("Horizontal");
+		float verticalMovement = Input.GetAxisRaw("Vertical");
+		
 	}
 }
