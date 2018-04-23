@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour {
 
 	//Public variables
-	public float walkspeed;
+	public float walkSpeed;
 
 	//Private variables
 	Rigidbody rb;
@@ -34,5 +34,10 @@ void Start () {
 	{
 		//Call the Move function
 		Move();
+	}
+
+	void Move()
+	{
+	 rb.velocity = moveDirection * walkSpeed * Time.deltaTime;
 	}
 }
