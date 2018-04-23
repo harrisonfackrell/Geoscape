@@ -24,8 +24,15 @@ void Start () {
 	// Update is called once per frame
 	void Update ()
 	{
+    //Get directional input from the user
 		float horizontalMovement = Input.GetAxisRaw("Horizontal");
 		float verticalMovement = Input.GetAxisRaw("Vertical");
-		
+
+	moveDirection =	(horizontalMovement * transform.right + verticalMovement * transform.forward).normalized;
+	}
+	void FixedUpdate()
+	{
+		//Call the Move function
+		Move();
 	}
 }
