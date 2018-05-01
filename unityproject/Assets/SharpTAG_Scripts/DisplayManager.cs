@@ -13,9 +13,9 @@ public class DisplayManager {
     titleField.text = str;
   }
   public static void updateRoomDisplay(string roomName) {
-     Room room = findByName(roomName, getRooms());
-     updateNameDisplay(room.givenName);
-     output(DisplayManager.buildCompleteDescription(roomName));
+    Room room = findByName(roomName, getRooms());
+    updateNameDisplay(room.givenName);
+    output(DisplayManager.buildCompleteDescription(roomName));
   }
   private static string describe(string roomName) {
     return findByName(roomName, getRooms()).description + ".";
@@ -50,8 +50,8 @@ public class DisplayManager {
   }
   public static string buildCompleteDescription(string roomName) {
     string description = describe(roomName);
-    description += " You see " + describeEntities(roomName);
-    description += " You can " + describeExits(roomName);
+    description += (" You see " + describeEntities(roomName));
+    description += (" You can " + describeExits(roomName));
     return description;
   }
   private static string manageListGrammar(ArrayList elements, string delimiter) {

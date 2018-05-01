@@ -6,7 +6,7 @@ using UnityEditor;
 using UnityEngine.EventSystems;
 
 public class OutputPrinter {
-	static Text outputBox = GameObject.Find("OutputField").GetComponent<Text>();
+	public static Text outputBox;
 	private static void reprintLines(string[] lines) {
 		//Print the first line, or throw it out if there are too many lines
 		if (lines.Length < calcLineLimit() && lines.Length > 1) {
@@ -72,9 +72,9 @@ public class OutputPrinter {
 		}
 	}
 	public static string embolden(string str) {
-		return tagify("b", str);
+		return tagify("i", tagify("b", str), str);
 	}
 	public static string embolden(string str, string substr) {
-		return tagify("b", str, substr);
+		return tagify("i", tagify("b", str, substr), substr);
 	}
 }

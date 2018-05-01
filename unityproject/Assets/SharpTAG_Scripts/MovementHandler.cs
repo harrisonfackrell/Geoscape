@@ -21,6 +21,8 @@ public class MovementHandler {
     if (direction != null) {
       moveEntity(player, direction);
       DisplayManager.updateRoomDisplay(player.location);
+    } else {
+      output("You can't go that way.");
     }
   }
   private static string testForExits(string input, string roomName) {

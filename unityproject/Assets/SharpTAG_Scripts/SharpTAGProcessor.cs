@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.EventSystems;
 using static SharpTAG;
+using UnityEngine.SceneManagement;
 
 public class SharpTAGProcessor : MonoBehaviour {
 	public Text outputBox;
@@ -13,6 +14,9 @@ public class SharpTAGProcessor : MonoBehaviour {
 	// Use this for initialization
 	void Awake() {
 		SharpTAGProcessor.instance = this;
+		this.inputBox = GameObject.Find("InputField").GetComponent<InputField>();
+		this.outputBox = GameObject.Find("OutputField").GetComponent<Text>();
+		OutputPrinter.outputBox = GameObject.Find("OutputField").GetComponent<Text>();
 	}
 	// Update is called once per frame
 	void Update() {
@@ -22,5 +26,9 @@ public class SharpTAGProcessor : MonoBehaviour {
 		InputProcessor.parseAndExecuteInput(getInput());
 		inputBox.text = "";
 		inputBox.ActivateInputField();
+	}
+	public static void loadWorld(World world) {
+		SharpTAGConfiguration.world = world;
+    SceneManager.LoadScene("SharpTAG UI", LoadSceneMode.Single);
 	}
 }

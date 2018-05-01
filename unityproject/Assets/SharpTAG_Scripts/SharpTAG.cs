@@ -10,9 +10,7 @@ static class SharpTAG {
 		OutputPrinter.output("> " + str);
 	}
 	public static string getInput() {
-		InputField inputBox =
-			GameObject.Find("InputField").GetComponent<InputField>();
-		return inputBox.text;
+		return SharpTAGProcessor.instance.inputBox.text;
 	}
 	public static World getWorld() {
 		return SharpTAGConfiguration.world;

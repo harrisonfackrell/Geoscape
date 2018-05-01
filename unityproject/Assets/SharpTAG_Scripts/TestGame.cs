@@ -10,7 +10,9 @@ public class TestGame : MonoBehaviour {
     new Dictionary<string, string[]> {
       {"look", new[] {"look", "examine"}},
       {"attack", new[] {"attack","kick","punch","fight","destroy","crush","break","smash","kill","bite"}},
-      {"inventory", new[] {"inventory","item"}}
+      {"inventory", new[] {"inventory","item"}},
+      {"move", new[] {"move","go","walk","run","step","fly","head"}},
+      {"polar bear", new[] {"polar", "bear"}}
     },
     new PlayerEntity("Nowhere",
       new Dictionary<string, Action> {
@@ -20,11 +22,18 @@ public class TestGame : MonoBehaviour {
     ),
     new Room[] {
       new Room("Nowhere",
-        "You are nowhere. It's quite a nice place, actually.",
+        "You are nowhere. It's quite a nice place, actually",
         new Dictionary<string, Exit> {
           {"south", new Exit("Nowhere.south","go south of nowhere")}
         },
         "Nowhere"
+      ),
+      new Room("Nowhere.south",
+        "You are now south of nowhere",
+        new Dictionary<string, Exit> {
+          {"north", new Exit("Nowhere","go back north")}
+        },
+        "South of Nowhere"
       )
     },
     new Entity[] {
@@ -32,14 +41,16 @@ public class TestGame : MonoBehaviour {
         "Nowhere",
         "A POLAR BEAR FOR SOME REASON",
         new Dictionary<string, Action> {
-
+          {"attack", () => {
+            output("I don't think that attacking a *POLAR BEAR* is wise");
+          } },
         },
         "POLAR BEAR"
       )
     }
   );
   public void init() {
-    SharpTAGConfiguration.world = TestGame.world;
-    SceneManager.LoadScene("SharpTAG UI", LoadSceneMode.Single);
+    SharpTAGProcessor.loadWorld(TestGame.world);
+    output("Hello");
   }
 }

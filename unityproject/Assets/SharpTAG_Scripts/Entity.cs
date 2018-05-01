@@ -11,6 +11,7 @@ public class Entity : Interactable {
    Dictionary<string, Action> methods, string givenName, Action turn = null) {
     this.name = name;
     this.location = location;
+    this.description = description;
     this.methods = new Dictionary<string, Action> {
       { "nothing", () => {
         output("Do what with the " + givenName + "?");
