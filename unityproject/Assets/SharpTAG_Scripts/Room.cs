@@ -14,5 +14,14 @@ public class Room {
      this.description = description;
      this.exits = exits;
      this.givenName = givenName;
-   }
+  }
+  public List<Interactable> localize(List<Interactable> entities) {
+    List<Interactable> narrowedEntities = new List<Interactable>();
+		for (int i = 0; i < entities.Count; i++) {
+			if (entities[i].location == this.name) {
+				narrowedEntities.Add(entities[i]);
+			}
+		}
+		return narrowedEntities;
+  }
 }

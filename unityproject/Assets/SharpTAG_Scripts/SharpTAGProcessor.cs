@@ -16,7 +16,7 @@ public class SharpTAGProcessor : MonoBehaviour {
 		SharpTAGProcessor.instance = this;
 		this.inputBox = GameObject.Find("InputField").GetComponent<InputField>();
 		this.outputBox = GameObject.Find("OutputField").GetComponent<Text>();
-		OutputPrinter.outputBox = GameObject.Find("OutputField").GetComponent<Text>();
+		SharpTAGConfiguration.world.greet();
 	}
 	// Update is called once per frame
 	void Update() {

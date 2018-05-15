@@ -22,9 +22,9 @@ public class DisplayManager {
   }
   private static string describeEntities(string roomName) {
     ArrayList descriptionList = new ArrayList();
-    Interactable[] entities = narrowInteractables(getEntities(), roomName);
-    if (entities.Length > 0) {
-      for (int i = 0; i < entities.Length; i++) {
+    List<Interactable> entities = findByName(roomName, getRooms()).localize(getEntities());
+    if (entities.Count > 0) {
+      for (int i = 0; i < entities.Count; i++) {
         descriptionList.Add(OutputPrinter.embolden(entities[i].description,
           entities[i].givenName));
       }

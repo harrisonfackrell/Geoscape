@@ -42,9 +42,9 @@ public class InputProcessor {
     //Return false if the input contains no synonyms
     return false;
   }
-  private static Interactable detectEntity(string input, Interactable[] entities) {
+  private static Interactable detectEntity(string input, List<Interactable> entities) {
     //For every entity
-    for (int i = 0; i < entities.Length; i++) {
+    for (int i = 0; i < entities.Count; i++) {
       //Test for its name in the input
       if (testForWord(input, entities[i].givenName)) {
         return entities[i];
@@ -70,15 +70,16 @@ public class InputProcessor {
 
     //Get the player and interactables
     PlayerEntity player = getPlayer();
-    Interactable[] interactables = getInteractables();
     //Narrow the interactables according to the player's location
-    interactables = narrowInteractables(getInteractables(), player.location);
+    List<Interactable> interactables = findByName(player.location,
+     getRooms()).localize(getInteractables());
     //Find a subject
     Interactable subject = detectEntity(input, interactables);
     //If the subject is the player (default)
     if (subject == player) {
       //Try again with the inventory
-      interactables = narrowInteractables(getInteractables(), "Inventory");
+      interactables = findByName("Inventory",
+       getRooms()).localize(getInteractables());
       subject = detectEntity(input, interactables);
     }
     //Find and return an action on the subject.

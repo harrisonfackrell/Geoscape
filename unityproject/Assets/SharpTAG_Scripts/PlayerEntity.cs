@@ -20,8 +20,8 @@ public class PlayerEntity : Interactable {
         output("I'm afraid I don't understand");
       } },
       { "inventory", () => {
-        Interactable[] entities = narrowInteractables(getEntities(), "Inventory");
-        if (entities.Length > 0) {
+        List<Interactable> entities = findByName("Inventory", getRooms()).localize(getEntities());
+        if (entities.Count > 0) {
           output("You have stuff");
         } else {
           output("You don't have stuff");

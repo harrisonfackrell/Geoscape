@@ -6,17 +6,16 @@ using UnityEditor;
 using UnityEngine.EventSystems;
 
 public class OutputPrinter {
-	public static Text outputBox;
 	private static void reprintLines(string[] lines) {
 		//Print the first line, or throw it out if there are too many lines
 		if (lines.Length < calcLineLimit() && lines.Length > 1) {
-			outputBox.text = lines[0] + "\n";
+			SharpTAGProcessor.instance.outputBox.text = lines[0] + "\n";
 		} else {
-			outputBox.text = "";
+			SharpTAGProcessor.instance.outputBox.text = "";
 		}
 		//Print all of the other lines
 		for (int i = 1; i < lines.Length - 1; i++) {
-			outputBox.text += lines[i] + "\n";
+			SharpTAGProcessor.instance.outputBox.text += lines[i] + "\n";
 		}
 	}
 	private static void printNewLine(string str) {
@@ -30,7 +29,7 @@ public class OutputPrinter {
 		}
 	}
 	private static void outputRaw(string str) {
-		outputBox.text += str;
+		SharpTAGProcessor.instance.outputBox.text += str;
 	}
 	private static int calcCharLimit() {
 		return ((Screen.width - 200) / 16);
@@ -54,8 +53,8 @@ public class OutputPrinter {
 	}
 	public static void output(string str) {
 		//Split the existing text into its component lines
-		string[] lines = outputBox.text.Split(new string[] { "\n" },
-		System.StringSplitOptions.None);
+		string[] lines = SharpTAGProcessor.instance.outputBox.text.Split(new string[] { "\n" },
+		 System.StringSplitOptions.None);
 		//reprint lines
 		reprintLines(lines);
 		//Print the new line

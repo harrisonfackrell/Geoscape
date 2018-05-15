@@ -20,7 +20,7 @@ public class TestGame : MonoBehaviour {
       },
       () => { }
     ),
-    new Room[] {
+    new List<Room> {
       new Room("Nowhere",
         "You are nowhere. It's quite a nice place, actually",
         new Dictionary<string, Exit> {
@@ -36,7 +36,7 @@ public class TestGame : MonoBehaviour {
         "South of Nowhere"
       )
     },
-    new Entity[] {
+    new List<Interactable> {
       new Entity("Nowhere.polarbear",
         "Nowhere",
         "A POLAR BEAR FOR SOME REASON",
@@ -47,10 +47,12 @@ public class TestGame : MonoBehaviour {
         },
         "POLAR BEAR"
       )
+    },
+    () => {
+      getPlayer().methods["look"]();
     }
   );
   public void init() {
     SharpTAGProcessor.loadWorld(TestGame.world);
-    output("Hello");
   }
 }
