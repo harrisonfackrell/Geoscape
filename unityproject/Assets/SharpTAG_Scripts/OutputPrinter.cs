@@ -1,31 +1,20 @@
 using System.Collections;
+using System.Linq;
+using System;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEditor;
 using UnityEngine.EventSystems;
 
 public class OutputPrinter {
-	private static void reprintLines(string[] lines) {
+	private static void reprintLines(string str) {
 		//Print the first line, or throw it out if there are too many lines
-		if (lines.Length < calcLineLimit() && lines.Length > 1) {
-			SharpTAGProcessor.instance.outputBox.text = lines[0] + "\n";
-		} else {
-			SharpTAGProcessor.instance.outputBox.text = "";
-		}
-		//Print all of the other lines
-		for (int i = 1; i < lines.Length - 1; i++) {
-			SharpTAGProcessor.instance.outputBox.text += lines[i] + "\n";
-		}
-	}
-	private static void printNewLine(string str) {
-		string[] newLines = chopOutput(str);
-		if (newLines.Length <= 1) {
-			outputRaw(newLines[0] + "\n");
-		} else {
-			for (int i = 0; i < newLines.Length; i++) {
-				output(newLines[i]);
-			}
+		string[] lines = chopOutput(str);
+		lines = lines.Skip(Math.Max(0, lines.Count() - calcLineLimit(str))).ToArray();
+		for (int i = 0; i < lines.Length; i++) {
+			outputRaw(lines[i] + "\n");
 		}
 	}
 	private static void outputRaw(string str) {
@@ -34,46 +23,49 @@ public class OutputPrinter {
 	private static int calcCharLimit() {
 		return ((Screen.width - 200) / 16);
 	}
-	private static int calcLineLimit() {
-		return (Screen.height / 70);
+	private static int calcReduction(string str) {
+		string[] lines = chopOutput(str);
+		return (str.Length / (calcCharLimit()));
+	}
+	private static int calcLineLimit(string str) {
+		return ((Screen.height / 70) - calcReduction(str));
 	}
 	private static string[] chopOutput(string str) {
-		int charLimit = calcCharLimit();
-		for (int i = charLimit; i < str.Length; i += charLimit) {
-			int index = str.LastIndexOf(' ', i, charLimit);
-			if (index == -1) {
-				str = str.Insert(i, "\n");
-			} else {
-				str = str.Insert(index, "\n");
-			}
-		}
-		string[] lines = str.Split(new string[] { "\n" },
-		System.StringSplitOptions.None);
-		return lines;
+		return str.Split(new string[] { "\n" }, System.StringSplitOptions.None);
 	}
 	public static void output(string str) {
 		//Split the existing text into its component lines
-		string[] lines = SharpTAGProcessor.instance.outputBox.text.Split(new string[] { "\n" },
-		 System.StringSplitOptions.None);
 		//reprint lines
-		reprintLines(lines);
+		string text = SharpTAGProcessor.instance.outputBox.text;
+		SharpTAGProcessor.instance.outputBox.text = "";
+		reprintLines(text);
 		//Print the new line
-		printNewLine(str);
+		outputRaw(str);
 	}
 	public static string tagify(string tagtext, string str) {
 		return tagify(tagtext, str, str);
 	}
 	public static string tagify(string tagtext, string str, string substr) {
-		if (str.Contains(substr)) {
-			return str.Replace(substr, "<" + tagtext + ">" + substr + "</" + tagtext + ">");
-		} else {
-			return str;
-		}
+		return tagify(tagtext, str, substr, tagtext);
+	}
+	public static string tagify(string tagtext, string str, string substr,
+	 string closetext) {
+		 if (str.Contains(substr)) {
+ 			return str.Replace(substr, "<" + tagtext + ">" + substr + "</" + closetext + ">");
+ 		} else {
+ 			return str;
+ 		}
 	}
 	public static string embolden(string str) {
 		return tagify("i", tagify("b", str), str);
 	}
 	public static string embolden(string str, string substr) {
 		return tagify("i", tagify("b", str, substr), substr);
+	}
+	public static string colorize(string color, string str) {
+		return colorize(color, str, str);
+	}
+	public static string colorize(string color, string str, string substr) {
+		return tagify("color=" + color, str, substr, "color");
 	}
 }

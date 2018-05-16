@@ -16,6 +16,8 @@ public class SharpTAGProcessor : MonoBehaviour {
 		SharpTAGProcessor.instance = this;
 		this.inputBox = GameObject.Find("InputField").GetComponent<InputField>();
 		this.outputBox = GameObject.Find("OutputField").GetComponent<Text>();
+	}
+	void Start() {
 		SharpTAGConfiguration.world.greet();
 	}
 	// Update is called once per frame
@@ -23,6 +25,7 @@ public class SharpTAGProcessor : MonoBehaviour {
 
 	}
 	public void enterHandler() {
+		outputUserText(getInput());
 		InputProcessor.parseAndExecuteInput(getInput());
 		inputBox.text = "";
 		inputBox.ActivateInputField();

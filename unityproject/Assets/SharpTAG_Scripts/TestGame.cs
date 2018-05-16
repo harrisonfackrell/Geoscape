@@ -49,7 +49,14 @@ public class TestGame : MonoBehaviour {
       )
     },
     () => {
-      getPlayer().methods["look"]();
+      DisplayManager.updateNameDisplay("G.I.U. v1.3.6");
+      output("Welcome to the Geoscape Interaction Utility. This program is " +
+       "designed to let you explore, through an intuitive interface, the worlds " +
+       "created by users of the Geoscape simulation. This particular world was " +
+       "created by lead programmer Thomas T. Sidus, and it will guide you through " +
+       "using the program.");
+      output("You can issue commands through the box displayed below. " +
+       "<i>look</i> around now.");
     }
   );
   public void init() {

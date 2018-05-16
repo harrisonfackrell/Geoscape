@@ -9,6 +9,12 @@ static class SharpTAG {
 	public static void output(string str) {
 		OutputPrinter.output("> " + str);
 	}
+	public static void outputUserText(string str) {
+		str = (str == "") ? " " : str;
+		str = str.Replace("<", "");
+		str = OutputPrinter.colorize("green", str);
+		output(str);
+	}
 	public static string getInput() {
 		return SharpTAGProcessor.instance.inputBox.text;
 	}
