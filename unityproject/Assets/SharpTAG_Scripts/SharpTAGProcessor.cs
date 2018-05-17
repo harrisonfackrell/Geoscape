@@ -25,7 +25,6 @@ public class SharpTAGProcessor : MonoBehaviour {
 
 	}
 	public void enterHandler() {
-		outputUserText(getInput());
 		InputProcessor.parseAndExecuteInput(getInput());
 		inputBox.text = "";
 		inputBox.ActivateInputField();

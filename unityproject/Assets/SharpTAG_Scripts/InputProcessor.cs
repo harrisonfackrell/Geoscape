@@ -55,19 +55,7 @@ public class InputProcessor {
     //If no input is found, return the player.
     return getPlayer();
   }
-  private static Action detectAction(string input, Interactable subject) {
-    //For each key in the subject's methods
-    foreach (string key in subject.methods.Keys) {
-      //Test to see if the input contains it
-      if(testForWord(input, key)) {
-        //return the action corresponding to the key.
-        return subject.methods[key];
-      }
-    }
-    //If nothing worked, return the "nothing" action.
-    return subject.methods["nothing"];
-  }
-  private static Action parseInput(string input) {
+  private static Interactable detectEntity(string input) {
     //Parses input, returning an action to run.
     //Get the player and interactables
     PlayerEntity player = getPlayer();
@@ -84,11 +72,30 @@ public class InputProcessor {
       subject = detectEntity(input, interactables);
     }
     //Find and return an action on the subject.
-    return detectAction(input, subject);
+    return subject;
+  }
+  private static Action detectAction(string input, Interactable subject) {
+    //For each key in the subject's methods
+    foreach (string key in subject.methods.Keys) {
+      //Test to see if the input contains it
+      if(testForWord(input, key)) {
+        //return the action corresponding to the key.
+        return subject.methods[key];
+      }
+    }
+    //If nothing worked, return the "nothing" action.
+    return subject.methods["nothing"];
   }
   public static void parseAndExecuteInput(string input) {
     //Parses and executes input. TAGjs adds some additional effects not yet
     //implemented in SharpTAG; these will come in a future update.
-    parseInput(input)();
+    Interactable subject = detectEntity(input);
+    if (subject.displayInput) {
+      outputUserText(input);
+    }
+    if (subject.advanceTurn) {
+      nextTurn();
+    }
+    detectAction(input, subject)();
   }
 }

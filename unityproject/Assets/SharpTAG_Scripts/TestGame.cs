@@ -9,20 +9,16 @@ public class TestGame : MonoBehaviour {
   public static World world = new World(
     new Dictionary<string, string[]> {
       {"look", new[] {"look", "examine"}},
-      {"attack", new[] {"attack","kick","punch","fight","destroy","crush","break","smash","kill","bite"}},
+      {"attack", new[] {"attack","kick","punch","fight","destroy","crush","break","smash","kill","bite","headbutt","stab","hit"}},
       {"inventory", new[] {"inventory","item"}},
       {"move", new[] {"move","go","walk","run","step","fly","head"}},
       {"touch", new[] {"touch","feel"}},
       {"take", new[] {"take","pick up","steal","get","keep"}},
+      {"eat", new[] {"eat","taste","lick","consume"}},
       {"polar bear", new[] {"polar", "bear"}}
     },
     new PlayerEntity("whiteroom",
       new Dictionary<string, Action> {
-        {"die", () => {
-          for (int i = 0; i < 4; i++) {
-            output("You're not alone here; don't you forget that.");
-          }
-        } },
         {"quit", () => {
           Application.Quit();
         } }
@@ -75,6 +71,10 @@ public class TestGame : MonoBehaviour {
           {"take", () => {
             output("You attempt to take the cube. It is too large, however, to " +
             "properly carry with you, so you leave it be");
+          } },
+          {"eat", () => {
+            output("You taste the cube. You feel on your tongue the complete " +
+            "absence of sensation; the cube truly tastes like nothing.");
           } }
         },
         "cube"
@@ -96,6 +96,10 @@ public class TestGame : MonoBehaviour {
           {"take", () => {
             output("You attempt to take the cube. It is too large, however, to " +
             "properly carry with you, so you leave it be");
+          } },
+          {"eat", () => {
+            output("You taste the cube. You feel on your tongue the complete " +
+            "absence of sensation; the cube truly tastes like nothing.");
           } }
         },
         "cube"

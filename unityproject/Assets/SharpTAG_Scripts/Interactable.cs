@@ -10,6 +10,8 @@ public class Interactable {
   public string givenName;
   public string prevLocation;
   public Action turn;
+  public bool advanceTurn;
+  public bool displayInput;
   public Interactable() {
 
   }

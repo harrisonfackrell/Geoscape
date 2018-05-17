@@ -1,4 +1,5 @@
-﻿using System.Collections;
+using UnityEditor;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,9 +33,16 @@ static class SharpTAG {
 	}
 	public static List<Interactable> getInteractables() {
 		//Get all of the interactable collections. There will one day be more.
-		List<Interactable> entities = getEntities();
+		List<Interactable> interactables = new List<Interactable>(getEntities());
+		interactables.Add(getPlayer());
 		//Return the new List<Interactable>
-		return entities;
+		return interactables;
+	}
+	public static void nextTurn() {
+		List<Interactable> interactables = getInteractables();
+		for (int i = 0; i < interactables.Count; i++) {
+			interactables[i].turn();
+		}
 	}
 	public static Interactable findByName(string name, List<Interactable> arr) {
 		for (int i = 0; i < arr.Count; i++) {

@@ -37,10 +37,17 @@ public class PlayerEntity : Interactable {
       } },
       { "move", () => {
         MovementHandler.movePlayerByInput(getInput());
+      } },
+      {"wait", () => {
+        output("You wait around for a moment.");
+        nextTurn();
       } }
     };
     this.methods = DataMutator.mergeDictionaries(this.methods, methods);
     this.prevLocation = location;
     this.givenName = "player";
+    this.turn = turn == null ? () => {} : turn;
+    this.advanceTurn = false;
+    this.displayInput = true;
   }
 }

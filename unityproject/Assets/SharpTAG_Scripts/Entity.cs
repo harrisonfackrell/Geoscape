@@ -25,6 +25,8 @@ public class Entity : Interactable {
     };
     this.methods = DataMutator.mergeDictionaries(this.methods, methods);
     this.givenName = givenName;
-    this.turn = turn;
+    this.turn = turn == null ? () => {} : turn;
+    this.advanceTurn = true;
+    this.displayInput = true;
   }
 }
