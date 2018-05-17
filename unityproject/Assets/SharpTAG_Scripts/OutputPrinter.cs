@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine.EventSystems;
 
 public class OutputPrinter {
@@ -24,7 +24,6 @@ public class OutputPrinter {
 		return ((Screen.width - 200) / 16);
 	}
 	private static int calcReduction(string str) {
-		string[] lines = chopOutput(str);
 		return (str.Length / (calcCharLimit()));
 	}
 	private static int calcLineLimit(string str) {
@@ -57,10 +56,10 @@ public class OutputPrinter {
  		}
 	}
 	public static string embolden(string str) {
-		return tagify("i", tagify("b", str), str);
+		return embolden(str, str);
 	}
 	public static string embolden(string str, string substr) {
-		return tagify("i", tagify("b", str, substr), substr);
+		return colorize("green", tagify("i", tagify("b", str, substr), substr), substr);
 	}
 	public static string colorize(string color, string str) {
 		return colorize(color, str, str);

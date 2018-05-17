@@ -1,4 +1,6 @@
 using System;
+using UnityEngine;
+//using UnityEditor;
 using System.Collections;
 using System.Collections.Generic;
 using static SharpTAG;
@@ -67,7 +69,6 @@ public class InputProcessor {
   }
   private static Action parseInput(string input) {
     //Parses input, returning an action to run.
-
     //Get the player and interactables
     PlayerEntity player = getPlayer();
     //Narrow the interactables according to the player's location

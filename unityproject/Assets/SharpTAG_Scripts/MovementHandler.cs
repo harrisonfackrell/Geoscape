@@ -25,7 +25,7 @@ public class MovementHandler {
       output("You can't go that way.");
     }
   }
-  private static string testForExits(string input, string roomName) {
+  public static string testForExits(string input, string roomName) {
     Room room = findByName(roomName, getRooms());
     foreach (string key in room.exits.Keys) {
       if (InputProcessor.testForWord(input, key)) {

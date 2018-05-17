@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine.EventSystems;
 using static SharpTAG;
 using UnityEngine.SceneManagement;

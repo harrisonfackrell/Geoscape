@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using static SharpTAG;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 
 public class PlayerEntity : Interactable {
   public PlayerEntity() {
@@ -17,14 +17,19 @@ public class PlayerEntity : Interactable {
     this.location = location;
     this.methods = new Dictionary<string, Action> {
       { "nothing", () => {
-        output("I'm afraid I don't understand");
+        string exit = MovementHandler.testForExits(getInput(), getPlayer().location);
+        if (exit == getInput()) {
+          getPlayer().methods["move"]();
+        } else {
+          output("Unrecognized command");
+        }
       } },
       { "inventory", () => {
         List<Interactable> entities = findByName("Inventory", getRooms()).localize(getEntities());
         if (entities.Count > 0) {
-          output("You have stuff");
+          output(" You have " + DisplayManager.describeEntities("Inventory"));
         } else {
-          output("You don't have stuff");
+          output("You are not carrying anything.");
         }
       } },
       { "look", () => {

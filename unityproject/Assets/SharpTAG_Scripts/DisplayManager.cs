@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine.EventSystems;
 using System;
 using static SharpTAG;
@@ -20,7 +20,7 @@ public class DisplayManager {
   private static string describe(string roomName) {
     return findByName(roomName, getRooms()).description + ".";
   }
-  private static string describeEntities(string roomName) {
+  public static string describeEntities(string roomName) {
     ArrayList descriptionList = new ArrayList();
     List<Interactable> entities = findByName(roomName, getRooms()).localize(getEntities());
     if (entities.Count > 0) {
