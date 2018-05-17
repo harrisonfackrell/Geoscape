@@ -109,7 +109,7 @@ public class TestGame : MonoBehaviour {
        "created by lead programmer Thomas T. Sidus, and it will allow you to " +
        "explore the capabilities of the program.");
       output(OutputPrinter.embolden("You can issue commands through the box displayed below. " +
-       "Look around now.", "look"));
+       "Look around now.", "Look"));
     }
   );
   public void init() {
