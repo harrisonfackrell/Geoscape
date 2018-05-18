@@ -9,6 +9,7 @@ public class TestGame : MonoBehaviour {
   public static World world = new World(
     new Dictionary<string, string[]> {
       {"look", new[] {"look", "examine"}},
+      {"talk", new[] {"talk","speak","ask"}},
       {"attack", new[] {"attack","kick","punch","fight","destroy","crush","break","smash","kill","bite","headbutt","stab","hit"}},
       {"inventory", new[] {"inventory","item"}},
       {"move", new[] {"move","go","walk","run","step","fly","head"}},
@@ -77,7 +78,30 @@ public class TestGame : MonoBehaviour {
             "absence of sensation; the cube truly tastes like nothing.");
           } }
         },
-        "cube"
+        "cube",
+        () => {
+          if (findByName("blackcube", getEntities()).age == 8) {
+            findByName("FRIENDNOT", getEntities()).warp("whiteroom");
+          }
+        }
+      ),
+      new Entity("FRIENDNOT",
+        "Nowhere",
+        "a FRIENDNOT",
+        new Dictionary<string, Action> {
+          {"attack", () => {
+            Application.Quit();
+          } },
+          {"look", () => {
+            for (int i = 0; i < 3; i++) {
+              output("FRIENDNOT");
+            }
+          } },
+          {"talk", () => {
+            output("...");
+          } }
+        },
+        "FRIENDNOT"
       ),
       new Entity("whitecube",
         "blackroom",

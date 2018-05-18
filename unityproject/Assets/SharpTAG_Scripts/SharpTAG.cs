@@ -1,4 +1,4 @@
-using UnityEditor;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -39,8 +39,10 @@ static class SharpTAG {
 		return interactables;
 	}
 	public static void nextTurn() {
-		List<Interactable> interactables = getInteractables();
+		List<Interactable> interactables = getInteractables().Where(interactable =>
+		 interactable.location != "Nowhere").ToList();
 		for (int i = 0; i < interactables.Count; i++) {
+			interactables[i].age += 1;
 			interactables[i].turn();
 		}
 	}

@@ -4,16 +4,10 @@ using System.Collections.Generic;
 using static SharpTAG;
 
 public class MovementHandler {
-  public static void warp(Interactable entity, string roomName) {
-    if (roomName != entity.prevLocation) {
-      entity.prevLocation = entity.location;
-    }
-    entity.location = roomName;
-  }
   public static void moveEntity(Interactable entity, string direction) {
     Room currentRoom = findByName(entity.location, getRooms());
     Dictionary<string, Exit> exits = currentRoom.exits;
-    warp(entity, exits[direction].location);
+    entity.warp(exits[direction].location);
   }
   public static void movePlayerByInput(string input) {
     PlayerEntity player = getPlayer();

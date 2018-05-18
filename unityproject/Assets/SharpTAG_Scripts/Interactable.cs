@@ -10,9 +10,16 @@ public class Interactable {
   public string givenName;
   public string prevLocation;
   public Action turn;
+  public int age = 0;
   public bool advanceTurn;
   public bool displayInput;
   public Interactable() {
 
+  }
+  public void warp(string roomName) {
+    if (roomName != this.prevLocation) {
+      this.prevLocation = this.location;
+    }
+    this.location = roomName;
   }
 }
